@@ -19,7 +19,7 @@ client.on('message', (msg) => {
     /* Check for people enabling the game by typing !four */
     if (msg.content === '!four' && !gameActive) {
       votes += 1;
-      if (votes >= 1) {
+      if (votes >= 5) {
         gameActive = true;
         return msg.channel.send(
           'Starting the four word game! Messages using words with more than 4 characters (exluding @mentions and URLs) will be DELETED! Type !end to end the game and tally scores.',
