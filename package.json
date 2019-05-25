@@ -1,0 +1,23 @@
+{
+  "name": "four-word-game",
+  "version": "1.0.0",
+  "description": "Four word game bot for GSLounge discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anna-log7/four-word-game.git"
+  },
+  "keywords": [
+    "game",
+    "four"
+  ],
+  "author": "Anna Davies",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anna-log7/four-word-game/issues"
+  },
+  "homepage": "https://github.com/Anna-log7/four-word-game#readme"
+}
