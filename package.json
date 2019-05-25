@@ -4,6 +4,8 @@
   "description": "Four word game bot for GSLounge discord",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +21,12 @@
   "bugs": {
     "url": "https://github.com/Anna-log7/four-word-game/issues"
   },
-  "homepage": "https://github.com/Anna-log7/four-word-game#readme"
+  "homepage": "https://github.com/Anna-log7/four-word-game#readme",
+  "dependencies": {
+    "discord.js": "^11.5.0",
+    "dotenv": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
+  }
 }
