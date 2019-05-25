@@ -5,7 +5,7 @@ const client = new Discord.Client();
 
 let votes = 0;
 let gameActive = false;
-let userScore = {};
+const userScore = {};
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -14,9 +14,11 @@ client.on('ready', () => {
 client.on('message', (msg) => {
   const { username } = msg.author;
 
+  /* Make sure we're not responding to our own messages */
   if (username !== 'Four Word Bot') {
+    /* Check for people enabling the game by typing !four */
     if (msg.content === '!four' && !gameActive) {
-      votes = votes + 1;
+      votes += 1;
       if (votes >= 1) {
         gameActive = true;
         return msg.channel.send(
@@ -28,14 +30,14 @@ client.on('message', (msg) => {
 
     if (gameActive) {
       const words = msg.content.split(' ');
-      console.log(words);
+      /* Check if a word is more than 4 chars long and isn't a link or a mention */
       if (words.some(word => word.length > 4 && !word.match(/https?:\/\//) && !word.match(/^@/))) {
         return msg.delete();
       }
 
       /* Check if there is already a score for the user */
-      if (Object.keys(userScore).some(key => key === username)) {
-        userScore[username] = userScore[username] + words.length;
+      if (Object.keys(userScore).some(key => key === username) && words.every(word => word !== '!end')) {
+        userScore[username] += words.length;
       } else {
         userScore[username] = words.length;
       }
@@ -46,8 +48,13 @@ client.on('message', (msg) => {
         votes = 0;
         msg.channel.send('Four word game ended!');
         if (Object.keys(userScore).length) {
-          msg.channel.send('tallying results...');
-          msg.channel.send(Object.entries(userScore));
+          const finalScores = Object.entries(userScore).map(([user, score]) => `${user}: ${score} points!\n`);
+          const winningScore = Math.max(...Object.values(userScore));
+          const winner = Object.keys(userScore).find(key => userScore[key] === winningScore);
+
+          msg.channel.send('Tallying results...');
+          msg.channel.send(finalScores);
+          return msg.channel.send(`Winner is: ${winner} with a score of ${winningScore}!`);
         }
       }
     }
